@@ -173,7 +173,7 @@ async function addHouse (address, rent) {
         console.log(confirmedTxn.receipt)
 
         if (confirmedTxn.receipt.success === true) {
-            return 'OK'
+            return confirmedTxn.receipt.transitions[0].msg
         }
     }
     catch (err) {
@@ -192,7 +192,7 @@ async function rentHouse (id, amount) {
             {
                 vname: 'houseId',
                 type: 'Uint32',
-                value: id,
+                value: id
             }
           ],
           {
@@ -220,7 +220,7 @@ async function rentHouse (id, amount) {
         console.log(confirmedTxn.receipt)
 
         if (confirmedTxn.receipt.success === true) {
-            return 'OK'
+            return confirmedTxn.receipt.transitions[0].msg
         }
     }
     catch (err) {
@@ -258,8 +258,7 @@ async function getState () {
             arrHouses.push(house)
         })
 
-        console.log(arrHouses)
-
+        return arrHouses
     }
     catch (err) {
         console.log(err)

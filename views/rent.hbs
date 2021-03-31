@@ -1,0 +1,17 @@
+<div>
+    <form name="frmRent" method="post" action="/listings/sendRent" >
+        <div>
+            <label for="selHouse">House</label>
+            <select name="selHouse">
+                {{#each houses}}
+                <option value="{{id}}">{{address}}</option>
+                {{/each}}
+            </select>
+            <br/><br/>
+            <label for="txtAmount">Amount</label>
+            <input type="text" name="txtAmount" placeholder="Amount">
+            <br/><br/>
+            <button type="submit">Rent</button>
+        </div>
+    </form>
+</div>

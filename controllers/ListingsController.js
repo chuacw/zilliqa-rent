@@ -16,7 +16,10 @@ router.get('/rent/:id/:amount', rent)
 router.get('/state', getState)
 
 router.get('/add', addHouse)
-router.post('/new', newHouse)
+router.post('/new', newHouse, getState)
+
+router.get('/rent', rentHouse)
+router.post('/sendRent', sendRent, getState)
 
 async function getListings(req, res, next) {
 
@@ -79,6 +82,7 @@ async function newHouse(req, res, next) {
     svcListings.addHouse(address, rent).then(result => {
 
         console.log(result)
+        next()
     })
 }
 
@@ -87,9 +91,40 @@ async function getState(req, res, next) {
 
     console.log('LISTINGS GET_STATE:')
 
-    svcListings.getState().then(result => {
+    svcListings.getState().then(listings => {
+
+        res.render('listings', {
+            title: 'Listings of Houses for Rent',
+            houses: listings 
+        })
+    })
+}
+
+async function rentHouse(req, res, next) {
+
+    console.log('LISTINGS RENT_HOUSE:')
+
+    svcListings.getState().then(listings => {
+
+        res.render('rent', {
+            title: 'Rent House',
+            houses: listings 
+        })
+    })
+}
+
+
+async function sendRent(req, res, next) {
+
+    let houseId = req.body.selHouse
+    let amount = req.body.txtAmount
+
+    console.log(`LISTINGS SEND_RENT: ${houseId} ${amount}`)
+
+    svcListings.rentHouse(houseId, amount).then(result => {
 
         console.log(result)
+        next()
     })
 }
 
