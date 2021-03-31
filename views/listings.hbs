@@ -1,4 +1,20 @@
-
-
 <div>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Address</th>
+            <th>Rent</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            {{#each houses}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{address}}</td>
+                <td>{{rent}}</td>
+                <td>{{status}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>
